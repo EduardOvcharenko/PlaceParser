@@ -1,0 +1,42 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+}
+
+@using (Html.BeginForm())
+{
+    <form method="post">
+        <button class="btn btn-default" value="Places" asp-page-handler="Locations">Get Locations</button>
+    </form>
+}
+<table class="table">
+    <thead>
+        <tr><th>Requsts: </th><th> PlacesCount: </th><th> LocationsCount: </th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.requestTry</td>
+            <td>@Model.Places.Count()</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr><th>Name</th><th>Adress</th><th>PlaceId</th><th>Location</th><th>Rating</th></tr>
+    </thead>
+    <tbody>
+
+        @foreach (var mil in Model.Places)
+        {
+        <tr>
+            <td>@mil.Name</td>
+            <td>@mil.Adress</td>
+            <td>@mil.PlaceId</td>
+            <td>@mil.Location</td>
+            <td>@mil.Rating</td>
+        </tr>
+        }
+    </tbody>
+</table>
