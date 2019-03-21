@@ -7,12 +7,12 @@ namespace PlaceParser.Models
 {
     public class Results
     {
-        public Geometry geometry { get; set; }
-        public OpeningHours opening_hours { get; set; }
-        public string id { get; set; }
-        public string name { get; set; }
-        public string place_id { get; set; }
-        public string rating { get; set; }
-        public string vicinity { get; set; }
+        public Geometry Geometry { get; set; }
+        public OpeningHours OpeningHours { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string PlaceId { get; set; }
+        public string Rating { get; set; }
+        public string Vicinity { get; set; }
     }
 }

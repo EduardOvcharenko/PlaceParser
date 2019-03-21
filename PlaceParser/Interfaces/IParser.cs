@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlaceParser.Models
+namespace PlaceParser
 {
-    public class OpeningHours
+    public interface IParser
     {
-        public bool OpenNow { get; set; }
+        void GetPlace();
     }
 }

@@ -1,18 +1,25 @@
 ﻿using Newtonsoft.Json;
 using PlaceParser.Data;
 using PlaceParser.Models;
-using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
-namespace PlaceParser
+namespace PlaceParser 
 {
-    public class Parser
+    public class Parser : IParser
     {
-        DBFcker DB = new DBFcker();
-        public void GetPlaces()
+        private readonly IDataBase _dataBase;
+        
+        public Parser(IDataBase dataBase)
+        {
+            _dataBase = dataBase;
+        }
+        public void GetPlace()
         {
             decimal latitude = 0;
             decimal longitude = 0;
@@ -24,23 +31,24 @@ namespace PlaceParser
                 }
             }
         }
+
         string GetLocationString(decimal lat, decimal lng)
         {
-            string locationString = lat.ToString().Replace(".",",") + "," + lng.ToString().Replace(".", ",");
+            string locationString = lat.ToString(CultureInfo.CreateSpecificCulture("de-DE")) + "," 
+                + lng.ToString(CultureInfo.CreateSpecificCulture("de-DE"));
             return locationString;
         }
         void GoogleRequest(string locationString)
         {
             string url = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+locationString+"&radius=500&type=bar&key=AIzaSyDNRQleDItpHaASUNyg4nsgGMqtwt8IOLU";
 
-            var result = new System.Net.WebClient().DownloadString(url);
+            var result = new WebClient().DownloadString(url);
             GooglePlaceResponse placeResponse = JsonConvert.DeserializeObject<GooglePlaceResponse>(result);
 
             if (placeResponse.Status == "OK")
             {
-                DB.SaveGooglePlace(placeResponse);
-            }
-            
+                _dataBase.SavePlace(placeResponse);
+            }   
         }
 
     }

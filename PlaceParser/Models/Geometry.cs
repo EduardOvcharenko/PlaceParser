@@ -7,6 +7,6 @@ namespace PlaceParser.Models
 {
     public class Geometry
     {
-        public Location location { get; set; }
+        public Location Location { get; set; }
     }
 }

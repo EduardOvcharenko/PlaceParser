@@ -17,14 +17,13 @@ namespace PlaceParser.Pages
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        Parser parse = new Parser();
-        
-
+        private readonly IParser _parser;
         public List<Place> Places { get; set; }
         
-        public IndexModel(ApplicationDbContext db)
+        public IndexModel(ApplicationDbContext db, IParser parser)
         {
             _context = db;
+            _parser = parser;
         }
         public void OnGet()
         {
@@ -32,9 +31,7 @@ namespace PlaceParser.Pages
         }
         public void OnPostLocations()
         {
-            parse.GetPlaces();
-
-            
+            _parser.GetPlace();
         } 
     }
 }
