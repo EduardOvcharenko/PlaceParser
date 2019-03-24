@@ -11,11 +11,11 @@ using System;
 
 namespace PlaceParser 
 {
-    public class Parser : IParser
+    public class GooglePlaceFinder : IParser
     {
         private readonly IDataBase _dataBase;
         
-        public Parser(IDataBase dataBase)
+        public GooglePlaceFinder(IDataBase dataBase)
         {
             _dataBase = dataBase;
         }
